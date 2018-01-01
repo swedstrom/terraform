@@ -7,7 +7,7 @@ resource "aws_vpc" "terraformmain" {
       Name = "Main Terraform Libratech ${var.environment} VPC"
       Terraform = "true"
       Environment = "${var.environment}"
-      Environment = "${var.environment}"
+      Stack = "${var.stack}"
     }
 }
 
@@ -18,6 +18,7 @@ resource "aws_vpc_dhcp_options" "mydhcp" {
     tags {
       Name = "My internal name"
       Environment = "${var.environment}"
+      Stack = "${var.stack}"
     }
 }
 
@@ -26,6 +27,7 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
     dhcp_options_id = "${aws_vpc_dhcp_options.mydhcp.id}"
     tags {
       Environment = "${var.environment}"
+      Stack = "${var.stack}"
     }
 }
 
@@ -36,6 +38,7 @@ resource "aws_route53_zone" "main" {
   comment = "Managed by terraform"
   tags {
     Environment = "${var.environment}"
+    Stack = "${var.stack}"
    }
 }
 
@@ -47,5 +50,6 @@ resource "aws_route53_record" "database" {
    records = ["${aws_instance.database.private_ip}"]
    tags {
      Environment = "${var.environment}"
+     Stack = "${var.stack}"
     }
 }

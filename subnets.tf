@@ -3,7 +3,8 @@ resource "aws_subnet" "PublicAZA" {
   cidr_block = "${var.Subnet-Public-AzA-CIDR}"
   tags {
         Name = "PublicAZA"
-        Stack = "${var.environment}"
+        Environment = "${var.environment}"
+        Stack = "${var.stack}"
   }
  availability_zone = "${data.aws_availability_zones.available.names[0]}"
 }
@@ -18,10 +19,17 @@ resource "aws_subnet" "PrivateAZA" {
   cidr_block = "${var.Subnet-Private-AzA-CIDR}"
   tags {
         Name = "PrivateAZA"
+        Environment = "${var.environment}"
+        Stack = "${var.stack}"
   }
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
 }
 resource "aws_route_table_association" "PrivateAZA" {
     subnet_id = "${aws_subnet.PrivateAZA.id}"
     route_table_id = "${aws_route_table.private.id}"
+  tags {
+        Name = "Route Table associated to PrivateAZA"
+        Environment = "${var.environment}"
+        Stack = "${var.stack}"
+  }
 }

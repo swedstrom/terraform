@@ -6,7 +6,8 @@ resource "aws_internet_gateway" "gw" {
    vpc_id = "${aws_vpc.terraform.id}"
     tags {
         Name = "internet gw terraform generated"
-        Stack = "${var.environment}"
+        Environment = "${var.environment}"
+        Stack = "${var.stack}"
     }
 }
 resource "aws_network_acl" "all" {
@@ -35,6 +36,7 @@ resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.terraform.id}"
   tags {
       Name = "Public"
+      Environment = "${var.environment}"
       Stack = "${var.environment}"
   }
   route {
@@ -46,6 +48,7 @@ resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.terraform.id}"
   tags {
       Name = "Private"
+       Environment = "${var.environment}"
       Stack = "${var.environment}"
   }
   route {
