@@ -6,7 +6,7 @@ resource "aws_security_group" "FrontEnd" {
   description = "ONLY HTTP CONNECTION INBOUD"
   vpc_id = "${aws_vpc.terraformmain.id}"
   tags {
-    Environment = "${var.stack}"
+    Environment = "${var.environment}"
    }
 
   ingress {
@@ -35,10 +35,10 @@ resource "aws_security_group" "elb" {
   name        = "elb_sg"
   description = "Used in the terraform"
   tags {
-    Environment = "${var.stack}"
+    Environment = "${var.environment}"
   }
 
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = "${aws_vpc.terraformmain.id}"
 
   # HTTP access from anywhere
   ingress {
@@ -64,7 +64,7 @@ resource "aws_security_group" "Database" {
   name = "Database"
   tags {
         Name = "Database"
-        Environment = "${var.stack}"
+        Environment = "${var.environment}"
   }
   description = "ONLY tcp CONNECTION INBOUND"
   vpc_id = "${aws_vpc.terraformmain.id}"

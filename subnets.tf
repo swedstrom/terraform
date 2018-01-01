@@ -3,7 +3,7 @@ resource "aws_subnet" "PublicAZA" {
   cidr_block = "${var.Subnet-Public-AzA-CIDR}"
   tags {
         Name = "PublicAZA"
-        Stack = "${var.stack}"
+        Stack = "${var.environment}"
   }
  availability_zone = "${data.aws_availability_zones.available.names[0]}"
 }

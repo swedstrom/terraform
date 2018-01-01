@@ -15,9 +15,9 @@ variable "domain" {
   description = "The main domain"
 }
 
-variable "stack" {
+variable "environment" {
   default = "ELB-EC2-DB}"
-  description = "the stack name"
+  description = "the environment name"
 }
 
 variable "environment" {
@@ -26,7 +26,7 @@ variable "environment" {
 }
 
 variable "vpc" {
-    default = "2teir-stack"
+    default = "2teir-environment"
   description = "The VPC "
 }
 
