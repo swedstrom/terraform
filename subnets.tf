@@ -27,9 +27,4 @@ resource "aws_subnet" "PrivateAZA" {
 resource "aws_route_table_association" "PrivateAZA" {
     subnet_id = "${aws_subnet.PrivateAZA.id}"
     route_table_id = "${aws_route_table.private.id}"
-  tags {
-        Name = "Route Table associated to PrivateAZA"
-        Environment = "${var.environment}"
-        Stack = "${var.stack}"
-  }
 }

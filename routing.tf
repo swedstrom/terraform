@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {}
 
 /* EXTERNAL NETWORG , IG, ROUTE TABLE */
 resource "aws_internet_gateway" "gw" {
-   vpc_id = "${aws_vpc.terraform.id}"
+   vpc_id = "${aws_vpc.terraformmain.id}"
     tags {
         Name = "internet gw terraform generated"
         Environment = "${var.environment}"
@@ -11,7 +11,7 @@ resource "aws_internet_gateway" "gw" {
     }
 }
 resource "aws_network_acl" "all" {
-   vpc_id = "${aws_vpc.terraform.id}"
+   vpc_id = "${aws_vpc.terraformmain.id}"
     egress {
         protocol = "-1"
         rule_no = 2
@@ -33,7 +33,7 @@ resource "aws_network_acl" "all" {
     }
 }
 resource "aws_route_table" "public" {
-  vpc_id = "${aws_vpc.terraform.id}"
+  vpc_id = "${aws_vpc.terraformmain.id}"
   tags {
       Name = "Public"
       Environment = "${var.environment}"
@@ -45,10 +45,10 @@ resource "aws_route_table" "public" {
     }
 }
 resource "aws_route_table" "private" {
-  vpc_id = "${aws_vpc.terraform.id}"
+  vpc_id = "${aws_vpc.terraformmain.id}"
   tags {
       Name = "Private"
-       Environment = "${var.environment}"
+      Environment = "${var.environment}"
       Stack = "${var.environment}"
   }
   route {

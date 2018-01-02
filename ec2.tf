@@ -14,7 +14,7 @@ resource "aws_instance" "phpapp" {
         Stack = "${var.stack}"
   }
   user_data = "${file("phpapp.sh")}"
-
+}
 
 #
 # The MySQL Database EC2

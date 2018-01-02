@@ -1,8 +1,8 @@
 resource "aws_elb" "web" {
-  name = "example-elb"
+  name = "elb"
 
   # The same availability zone as our instance
-  subnets = ["${aws_subnet.tf_test_subnet.id}"]
+  subnets = ["${aws_subnet.PublicAZA.id}"]
 
   security_groups = ["${aws_security_group.elb.id}"]
 
@@ -23,7 +23,7 @@ resource "aws_elb" "web" {
 
   # The instance is registered automatically
 
-  instances                   = ["${aws_instance.web.id}"]
+  instances                   = ["${aws_instance.phpapp.id}"]
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
@@ -37,29 +37,3 @@ resource "aws_lb_cookie_stickiness_policy" "default" {
   cookie_expiration_period = 600
 }
 
-resource "aws_instance" "web" {
-  instance_type = "t2.micro"
-
-  # Lookup the correct AMI based on the region
-  # we specified
-  ami = "${lookup(var.aws_amis, var.aws_region)}"
-
-  # The name of our SSH keypair you've created and downloaded
-  # from the AWS console.
-  #
-  # https://console.aws.amazon.com/ec2/v2/home?region=us-west-2#KeyPairs:
-  #
-  key_name = "${var.key_name}"
-
-  # Our Security group to allow HTTP and SSH access
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
-  subnet_id              = "${aws_subnet.tf_test_subnet.id}"
-  user_data              = "${file("userdata.sh")}"
-
-  #Instance tags
-
-  tags {
-    Name = "elb-example"
-    
-  }
-}
