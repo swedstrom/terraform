@@ -16,7 +16,7 @@ variable "domain" {
 }
 
 variable "stack" {
-  default = "ELB-EC2-DB}"
+  default = "ELB-EC2-DB"
   description = "the stack name"
 }
 

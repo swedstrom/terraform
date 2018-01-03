@@ -27,6 +27,9 @@ To build the Terrafrom run:
 ===========================
 
     terraform apply -var-file="~/.aws/credentials.tfvar"
+      AWS_DEFAULT_REGION='us-west-1' terraform apply -auto-approve -var-file="~/.aws/credentials.tfvar"
+
+    the AWS_DEFAULT_REGION keeps it so you don't have to keep answering the input question of "what region"
 
 
 ----------------------------

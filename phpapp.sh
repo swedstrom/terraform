@@ -4,11 +4,26 @@
 #
 # phpapp.ssh
 #
+#
+# Install PHP 7.1
+#
+apt-get install software-properties-common
+add-apt-repository ppa:ondrej/php -y
+apt-get update -y
+apt-get install php7.1-fpm php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-cli -y
+systemctl restart php7.1-fpm.service
+systemctl enable php7.1-fpm.service
 
+
+
+#
+# Install nginx
+#
 apt-get update -y
 apt-get install -y nginx > /tmp/nginx.log
 service nginx start
 systemctl enable nginx.service
+apt-get update -y
 
 
 echo "<?php" >> /var/www/html/calldb.php
