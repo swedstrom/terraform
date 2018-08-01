@@ -33,5 +33,5 @@ To build the Terrafrom run:
 
 
 ----------------------------
-Ref: https://github.com/koding/terraform/blob/master/examples/aws-elb/main.tf
+
 
